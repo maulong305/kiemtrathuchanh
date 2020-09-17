@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head">
+
+</head>
+<body>
+<h1>Create city</h1>
+<p>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/cities/create-city}" th:object="${city}" method="post">
+    <table id="cities">
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+            <th scope="col" th:errors="*{name}"></th>
+        </tr>
+
+        <tr>
+            <td>Country:</td>
+
+            <td>
+                <select th:field="*{country}">
+                    <option th:each="c : ${countries}" th:value="${c.id}" th:text="${c.name}"></option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Area:</td>
+            <td><input type="text" th:field="*{area}"/></td>
+            <th scope="col" th:errors="*{area}"></th>
+        </tr>
+
+        <tr>
+            <td>Population:</td>
+            <td><input type="text" th:field="*{population}"/></td>
+            <th scope="col" th:errors="*{population}"></th>
+        </tr>
+
+            <td>GDP:</td>
+            <td><input type="text" th:field="*{gdp}"/></td>
+        <th scope="col" th:errors="*{gdp}"></th>
+        </tr>
+
+            <td>Description:</td>
+            <td><input type="text" th:field="*{description}"/></td>
+        <th scope="col" th:errors="*{description}"></th>
+        </tr>
+
+
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Create city">
+
+                <a href="/cities">Exit</a>
+            </td>
+
+
+        </tr>
+    </table>
+</form>
+</body>
+</html>

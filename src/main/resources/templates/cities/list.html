@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head">
+
+</head>
+<body>
+
+<h1>List of city</h1>
+
+<table id="cities">
+  <tr>
+    <td>
+      <form>
+        <label>
+          Search by name:
+          <input type="text" name="s">
+        </label>
+        <input type="submit" value="Search">
+      </form>
+
+      <span th:if="${keyword}">
+  Search result for <code>"[[${keyword}]]"</code>, <a th:href="@{/cities}">click here to clear</a>.<br>
+</span>
+      There are [[${cities.totalElements}]] city(s).
+
+    </td>
+
+    <td>
+      <a href="/cities/create-city"> <button>Create City</button></a>
+    </td>
+  </tr>
+</table>
+
+<table id="cities">
+  <caption>Cities List</caption>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Country</th>
+    <th>Area</th>
+    <th>Population</th>
+    <th>GDP</th>
+    <th>Description</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="c : ${cities}">
+    <td th:text="${c.id}"></td>
+    <td>
+      <a th:href="@{/cities/{id}(id=${c.id})}" th:text="${c.name}"></a>
+    </td>
+    <td th:text="${c.country?.name}"></td>
+    <td th:text="${c.area}"></td>
+    <td th:text="${c.population}"></td>
+    <td th:text="${c.gdp}"></td>
+    <td th:text="${c.description}"></td>
+    <td><a th:href="@{/cities/edit-city/__${c.id}__ }"><button>Edit</button></a>
+      <a th:href="@{/cities/delete-city/__${c.id}__ }"><button>Delete</button></a></td>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<div>
+  <a th:if="${cities.hasPrevious()}"
+     th:href="@{'/cities'(page=${cities.number - 1}, size=${cities.size}, s=${keyword})}">
+    Previous
+  </a>
+  [[${cities.number + 1}]]/[[${cities.totalPages}]]
+  <a th:if="${cities.hasNext()}"
+     th:href="@{'/cities'(page=${cities.number + 1}, size=${cities.size}, s=${keyword})}">
+    Next
+  </a>
+</div>
+</body>
+</html>

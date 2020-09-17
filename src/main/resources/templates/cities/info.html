@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head">
+
+</head>
+<body>
+<form action="/cities" method="post">
+  <fieldset>
+    <legend>City Information</legend>
+    <input type="hidden" name="id" th:value="${city.id}">
+    <table id="cities">
+      <tr>
+        <td>Id</td>
+        <td th:text="${city.id}"></td>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td>
+          <input type="text" name="name" th:value="${city.name}">
+        </td>
+      </tr>
+
+      <tr>
+        <td>Country</td>
+      <td>
+        <select name="Country">
+          <option th:each="c : ${countries}" th:value="${c.id}" th:text="${c.name}"></option>
+        </select>
+      </td>
+      </tr>
+
+
+      <tr>
+        <td>Area</td>
+        <td>
+          <input type="text" name="area" th:value="${city.area}">
+        </td>
+      </tr>
+      <tr>
+        <td>Population</td>
+        <td>
+          <input type="text" name="population" th:value="${city.population}">
+        </td>
+      </tr>
+      <tr>
+        <td>GDP</td>
+        <td>
+          <input type="text" name="gdp" th:value="${city.gdp}">
+        </td>
+      </tr>
+      <tr>
+        <td>Description</td>
+        <td>
+          <input type="text" name="description" th:value="${city.description}">
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2">
+          <input type="submit" value="Update">
+        </td>
+      </tr>
+    </table>
+  </fieldset>
+</form>
+<a href="/cities">Back to list</a>.
+</body>
+</html>

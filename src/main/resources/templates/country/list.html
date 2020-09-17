@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head">
+
+</head>
+<body>
+<a href="/create-country">Create new country</a>
+<h1>Countries</h1>
+<table id="cities">
+    <tr>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    <th:block th:each="country : ${countries}">
+        <tr>
+            <td th:text="${country.name}"></td>
+            <td><a th:href="@{/edit-country/__${country.id}__ }"><button>Edit</button></a>
+                <a th:href="@{/delete-country/__${country.id}__ }"><button>Delete</button></a>
+            </td>
+            <td></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>
